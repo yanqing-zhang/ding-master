@@ -6,7 +6,7 @@
 @Date    ：2024/11/20 23:00 
 '''
 import torch.nn as nn
-from utils import clones
+from repo.utils import clones
 from sublayer_connection import SublayerConnection
 class EncoderLayer(nn.Module):
 

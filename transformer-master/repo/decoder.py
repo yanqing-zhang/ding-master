@@ -6,7 +6,7 @@
 @Date    ：2024/11/21 13:41 
 '''
 import torch.nn as nn
-from utils import clones
+from repo.utils import clones
 from layer_norm import LayerNorm
 
 class Decoder(nn.Module):
