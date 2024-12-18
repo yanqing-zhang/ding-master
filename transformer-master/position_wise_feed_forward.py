@@ -7,6 +7,8 @@
 '''
 import torch.nn as nn
 import torch.nn.functional as F
+from multiheaded_attention import multiheaded_attention_testdata
+
 class PositionwiseFeedForward(nn.Module):
     # 通过类PositionwiseFeedForward来实现前馈全连接层
     def __init__(self, d_model, d_ff, dropout=0.1):
@@ -28,5 +30,26 @@ class PositionwiseFeedForward(nn.Module):
         # 之后再使用dropout进行随机置0，最后通过第二个线性层w2，返回最终结果.
         return self.w2(self.dropout(F.relu(self.w1(x))))
 
+def positionwise_feed_forward_testdata():
+    """
+    前馈全连接层测试数据制造
+    :return:
+    """
+    d_model = 512
+    # 线性变化的维度
+    d_ff = 64
+    dropout = 0.2
+    x = multiheaded_attention_testdata()
+    ff = PositionwiseFeedForward(d_model, d_ff, dropout)
+    ff_result = ff(x)
+    return ff_result
+
 if __name__ == '__main__':
-    pass
+    d_model = 512
+    d_ff = 64
+    dropout = 0.2
+    x = multiheaded_attention_testdata()
+    ff = PositionwiseFeedForward(d_model, d_ff, dropout)
+    ff_result = ff(x)
+    print(f"ff_result:{ff_result}")
+    print(f"shape of ff_result:{ff_result.shape}")
