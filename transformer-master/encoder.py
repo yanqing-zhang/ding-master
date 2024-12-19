@@ -58,7 +58,7 @@ def encoder_testdata():
     pe_result = positional_encoding_testdata()
     x = pe_result
     en_result = en(x, mask)
-    return en_result
+    return en_result, en
 
 if __name__ == '__main__':
     # 调用验证

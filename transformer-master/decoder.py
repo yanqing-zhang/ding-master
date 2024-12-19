@@ -54,13 +54,13 @@ def decoder_testdata():
     # 输入参数与解码器层的输入参数相同
     pe_result = positional_encoding_testdata()
     x = pe_result
-    en_result = encoder_testdata()
+    en_result,_ = encoder_testdata()
     memory = en_result
     mask = Variable(torch.zeros(8, 4, 4))
     source_mask = target_mask = mask
     de = Decoder(layer, N)
     de_result = de(x, memory, source_mask, target_mask)
-    return de_result
+    return de_result, de
 
 
 if __name__ == '__main__':
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     # 输入参数与解码器层的输入参数相同
     pe_result = positional_encoding_testdata()
     x = pe_result
-    en_result = encoder_testdata()
+    en_result, _ = encoder_testdata()
     memory = en_result
     mask = Variable(torch.zeros(8, 4, 4))
     source_mask = target_mask = mask

@@ -40,12 +40,12 @@ def generate_testdata():
     vocab_size = 1000
 
     # 输入x是上一层网络的输出, 我们使用来自解码器层的输出
-    de_result = decoder_testdata()
+    de_result,_ = decoder_testdata()
     x = de_result
 
     gen = Generator(d_model, vocab_size)
     gen_result = gen(x)
-    return gen_result
+    return gen_result, gen
 
 if __name__ == '__main__':
     # 调用验证
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     vocab_size = 1000
 
     # 输入x是上一层网络的输出, 我们使用来自解码器层的输出
-    de_result = decoder_testdata()
+    de_result,_ = decoder_testdata()
     x = de_result
 
     gen = Generator(d_model, vocab_size)
