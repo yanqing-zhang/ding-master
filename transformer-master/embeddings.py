@@ -5,18 +5,19 @@
 @Author  ：yanqing.zhang@
 @Date    ：2024/12/14 17:27 
 '''
-# 导入必备的工具包
 import torch
 # 预定义的网络层torch.nn,工具开发者已经帮我们开发好了一些常用层，
 # 比如， 卷积层， lstm层， embedding层等， 不需要我们再重新造轮子了
 import torch.nn as nn
-# 数学计算工具包
 import math
 # torch 中变量封装函数Variable
 from torch.autograd import Variable
-# 定义Embedings类来实现文本嵌入层，这里s说明代表两个一模一样的嵌入层，他们共享参数。
-# 该类继承nn.Module,这样就有标准层的一些功能，这里我们也可以理解为一种模式，我们自己实现的所有层
+
 class Embeddings(nn.Module):
+    """
+    定义Embedings类来实现文本嵌入层，这里s说明代表两个一模一样的嵌入层，他们共享参数。
+    该类继承nn.Module,这样就有标准层的一些功能，这里我们也可以理解为一种模式，我们自己实现的所有层
+    """
     def __init__(self, d_model, vocab):
         """类的初始化函数， 有两个参数， d_model:指词嵌入的维度，vocab:指词表的大小。"""
         # 接着就是使用super的方式指明继承nn.Module的初始化函数， 我们自己实现的所有层都会这样去实现

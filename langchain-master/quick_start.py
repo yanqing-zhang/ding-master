@@ -141,7 +141,4 @@ if __name__ == '__main__':
         output_parser_base()
     else:
         chain_2()
-    # model.invoke(messages)
-    # result = prompt_template.invoke({"language": "Italian", "text": "hi!"})
-    # print(f"result: {result}")
 

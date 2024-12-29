@@ -8,3 +8,13 @@ pip install "langserve[all]"
 pip install langchain-cli
 pip install langsmith
 pip install -e .
+
+
+# 异常 ModuleNotFoundError: No module named 'bs4' # qa_over_document.py
+pip install beautifulsoup4
+
+# 用于google的serpapi搜索
+pip install google-search-results
+
+# 安装langchain-chroma需提前安装error: microsoft visual c++ 14.0 or greater is required.
+pip install langchain-chroma
