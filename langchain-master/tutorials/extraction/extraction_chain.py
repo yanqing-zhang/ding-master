@@ -16,6 +16,9 @@ from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
+"""
+通过langchain提取链可以把非结构化的文本进行结构化
+"""
 
 class Person(BaseModel):
     """Information about a person."""
@@ -39,7 +42,6 @@ class Person(BaseModel):
 
 class Data(BaseModel):
     """Extracted data about people."""
-
     # Creates a model so that we can extract multiple entities.
     people: List[Person]
 
@@ -70,12 +72,14 @@ if not os.environ.get("OPENAI_API_KEY"):
   os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
 
 
-def get_structured_llm():
+def get_llm():
     llm = ChatOpenAI(model="gpt-4o-mini")
-    structured_llm = llm.with_structured_output(schema=Person)
+    return llm
+
 
 def extract_person():
-    structured_llm = get_structured_llm()
+    llm = get_llm()
+    structured_llm = llm.with_structured_output(schema=Person)
     text = "Alan Smith is 6 feet tall and has blond hair."
     prompt = prompt_template.invoke({"text": text})
 
@@ -83,19 +87,33 @@ def extract_person():
     print(f"response:{response}")
 
 def extract_data():
+    llm = get_llm()
     structured_llm = llm.with_structured_output(schema=Data)
     text = "My name is Jeff, my hair is black and i am 6 feet tall. Anna has the same color hair as me."
     prompt = prompt_template.invoke({"text": text})
-    structured_llm.invoke(prompt)
+    response = structured_llm.invoke(prompt)
+    print(f"response:{response}")
+
+def extract_example():
+    """
+    🦜代表的是一种未知的计算符号，一开始也不知道他是+或-或×或÷，
+    但通过几个示例，大模型就可以推断出🦜的是哪个计算符号，从而能计算出 3 🦜 4的结果是7
+    """
+    messages = [
+        {"role": "user", "content": "2 🦜 2"},
+        {"role": "assistant", "content": "4"},
+        {"role": "user", "content": "2 🦜 3"},
+        {"role": "assistant", "content": "5"},
+        {"role": "user", "content": "3 🦜 4"},
+    ]
+    llm = get_llm()
+    response = llm.invoke(messages)
+    print(response.content)
 
 
-messages = [
-    {"role": "user", "content": "2 🦜 2"},
-    {"role": "assistant", "content": "4"},
-    {"role": "user", "content": "2 🦜 3"},
-    {"role": "assistant", "content": "5"},
-    {"role": "user", "content": "3 🦜 4"},
-]
-
-response = llm.invoke(messages)
-print(response.content)
+if __name__ == '__main__':
+    if True:
+        extract_example()
+    else:
+        extract_person()
+        extract_data()
