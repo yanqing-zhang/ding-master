@@ -1,4 +1,4 @@
-'''
+ '''
 @Project ：transformer-master 
 @File    ：positional_encoding.py
 @IDE     ：PyCharm 

@@ -16,6 +16,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
+from langchain_core.utils.function_calling import tool_example_to_messages
+
 """
 通过langchain提取链可以把非结构化的文本进行结构化
 """
@@ -111,9 +113,51 @@ def extract_example():
     print(response.content)
 
 
+
+def extract_tool_call_example():
+    examples = [
+        (
+            "The ocean is vast and blue. It's more than 20,000 feet deep.",
+            Data(people=[]),
+        ),
+        (
+            "Fiona traveled far from France to Spain.",
+            Data(people=[Person(name="Fiona", height_in_meters=None, hair_color=None)]),
+        ),
+    ]
+    messages = []
+
+    for txt, tool_call in examples:
+        if tool_call.people:
+            # This final message is optional for some providers
+            ai_response = "Detected people."
+        else:
+            ai_response = "Detected no people."
+        messages.extend(tool_example_to_messages(txt, [tool_call], ai_response=ai_response))
+
+    for message in messages:
+        message.pretty_print()
+
+    extract_tool_call_people(messages)
+
+def extract_tool_call_people(messages):
+    llm = get_llm()
+    message_no_extraction = {
+        "role": "user",
+        "content": "The solar system is large, but earth has only 1 moon.",
+    }
+
+    structured_llm = llm.with_structured_output(schema=Data)
+    response = structured_llm.invoke([message_no_extraction])
+    print(f"response:{response}")
+
+    result = structured_llm.invoke(messages + [message_no_extraction])
+    print(f"result:{result}")
+
 if __name__ == '__main__':
     if True:
-        extract_example()
+        extract_tool_call_example()
     else:
         extract_person()
         extract_data()
+        extract_example()
