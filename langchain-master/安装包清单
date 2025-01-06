@@ -9,6 +9,10 @@ pip install langchain-cli
 pip install langsmith
 pip install -e .
 
+pip install langchain-anthropic
+pip install tavily-python
+pip install langgraph-checkpoint-sqlite
+
 
 # 异常 ModuleNotFoundError: No module named 'bs4' # qa_over_document.py
 pip install beautifulsoup4
@@ -18,3 +22,6 @@ pip install google-search-results
 
 # 安装langchain-chroma需提前安装error: microsoft visual c++ 14.0 or greater is required.
 pip install langchain-chroma
+
+申请tavily-API-KEY地址
+https://docs.tavily.com/docs/rest-api/api-reference

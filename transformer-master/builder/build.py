@@ -3,7 +3,8 @@
 @File    ：build.py
 @IDE     ：PyCharm 
 @Author  ：yanqing.zhang@
-@Date    ：2024/12/19 14:29 
+@Date    ：2024/12/19 14:29
+@reference :https://sliu.vip/machine-learning/transformer-example/
 '''
 import torch
 import torchtext
