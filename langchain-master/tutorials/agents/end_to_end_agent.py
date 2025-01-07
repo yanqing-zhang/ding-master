@@ -23,6 +23,7 @@ if not os.environ.get("TAVILY_API_KEY"):
 if not os.environ.get("OPENAI_API_KEY"):
   os.environ["OPENAI_API_KEY"] = getpass.getpass("Enter API key for OpenAI: ")
 
+
 def get_tavil_key():
     tavily_key = os.getenv("TAVILY_API_KEY")
     print(f"tavily_key:{tavily_key}")
