@@ -17,7 +17,6 @@ from IPython.display import Image, display
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain import hub
-from langchain_core.messages import HumanMessage
 from langgraph.prebuilt import create_react_agent
 from langchain_openai import OpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
