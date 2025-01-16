@@ -6,12 +6,11 @@
 @Date    ：2024/12/15 20:10 
 '''
 import torch
-import torch.nn as nn
 import math
 import torch.nn.functional as F
 from torch.autograd import Variable
-from embeddings import Embeddings
-from positional_encoding import PositionalEncoding
+from bottom_to_up.embeddings import Embeddings
+from bottom_to_up.positional_encoding import PositionalEncoding
 
 
 def attention(query, key, value, mask=None, dropout=None):

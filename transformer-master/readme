@@ -1,0 +1,6 @@
+pip install torchdata==0.7.1
+pip install portalocker==2.1.0
+修改:C:\Users\yanqi\.conda\envs\torch-gpt-gpu\Lib\site-packages\torchtext\datasets\wikitext2.py
+文件中的URL,操作如下：
+1、进入当前虚拟环境下的lib/python3.8/site-packages/torchtext/datasets/wikitext2.py
+2、修改URL = "https://modelscope-open.oss-cn-hangzhou.aliyuncs.com/wikitext/wikitext-2-v1.zip"

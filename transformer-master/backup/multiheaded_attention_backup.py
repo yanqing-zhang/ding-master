@@ -7,11 +7,11 @@
 '''
 import torch
 import torch.nn as nn
-from utils import clones
-from attention_utils import attention
-from positional_encoding import PositionalEncoding
+from bottom_to_up.utils import clones
+from bottom_to_up.attention_utils import attention
+from bottom_to_up.positional_encoding import PositionalEncoding
 from torch.autograd import Variable
-from embeddings import Embeddings
+from bottom_to_up.embeddings import Embeddings
 class MultiHeadedAttention(nn.Module):
 
     def __init__(self, head, embedding_dim, dropout=0.1):
